@@ -52,19 +52,18 @@ TARGET_BOOTLOADER_BOARD_NAME := msm8953
 TARGET_NO_BOOTLOADER := true
 
 # Kernel
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_RAMDISK_OFFSET := 0x01000000
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
-# TARGET_KERNEL_APPEND_DTB := true
+TARGET_KERNEL_APPEND_DTB := true
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_SOURCE := kernel/huawei/msm8953
 TARGET_KERNEL_CONFIG := merge_msm8953_64_defconfig
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-#BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/mkbootimg.mk
 
 # ANT
 BOARD_ANT_WIRELESS_DEVICE := "qualcomm-hidl"
@@ -229,9 +228,9 @@ USE_SENSOR_MULTI_HAL := true
 
 # Shims
 TARGET_LD_SHIM_LIBS := \
-    /system/vendor/lib/libhwlog.so|libshim_cutils.so \
-    /system/vendor/lib64/libhwlog.so|libshim_cutils.so \
-    /system/vendor/lib/libmmcamera_ppeiscore.so|/system/lib/libshim_camera.so
+    /vendor/lib/libhwlog.so|libshim_cutils.so \
+    /vendor/lib64/libhwlog.so|libshim_cutils.so \
+    /vendor/lib/libmmcamera_ppeiscore.so|/system/lib/libshim_camera.so
 
 # Wifi
 BOARD_HAS_QCOM_WLAN := true
