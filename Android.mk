@@ -47,11 +47,15 @@ $(LOCAL_BUILT_MODULE): WCNSS_BIN_SYMLINK := $(TARGET_OUT_VENDOR)/firmware/wlan/p
 $(LOCAL_BUILT_MODULE): ACTUAL_DAT_FILE := /persist/WCNSS_wlan_dictionary.dat
 $(LOCAL_BUILT_MODULE): WCNSS_DAT_SYMLINK := $(TARGET_OUT_VENDOR)/firmware/wlan/prima/WCNSS_wlan_dictionary.dat
 
+$(LOCAL_BUILT_MODULE): ACTUAL_FIRMWARE_FILE := /vendor/etc/firmware
+$(LOCAL_BUILT_MODULE): FIRMWARE_SYMLINK := $(TARGET_OUT)/etc/firmware
+
 $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/Android.mk
 $(LOCAL_BUILT_MODULE):
-	$(hide) echo "Making symlinks for wifi"
+	$(hide) echo "Making symlinks for wifi and firmware"
 	$(hide) mkdir -p $(dir $@)
 	$(hide) mkdir -p $(dir $(WCNSS_INI_SYMLINK))
+	$(hide) mkdir -p $(dir $(FIRMWARE_SYMLINK))
 	$(hide) rm -rf $@
 	$(hide) rm -rf $(WCNSS_INI_SYMLINK)
 	$(hide) ln -sf $(ACTUAL_INI_FILE) $(WCNSS_INI_SYMLINK)
@@ -59,6 +63,8 @@ $(LOCAL_BUILT_MODULE):
 	$(hide) ln -sf $(ACTUAL_BIN_FILE) $(WCNSS_BIN_SYMLINK)
 	$(hide) rm -rf $(WCNSS_DAT_SYMLINK)
 	$(hide) ln -sf $(ACTUAL_DAT_FILE) $(WCNSS_DAT_SYMLINK)
+	$(hide) rm -rf $(FIRMWARE_SYMLINK)
+	$(hide) ln -sf $(ACTUAL_FIRMWARE_FILE) $(FIRMWARE_SYMLINK)
 	$(hide) touch $@
 
 IMS_LIBS := libimscamera_jni.so libimsmedia_jni.so
